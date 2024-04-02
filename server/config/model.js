@@ -16,9 +16,8 @@ const ContactSchema = new Schema({
   }
 });
 
-const ContactInfo = model('ContactInfo',ContactSchema);
+const ContactInfo = model('contactinfo',ContactSchema);
 module.exports = ContactInfo;
-
 
 
 

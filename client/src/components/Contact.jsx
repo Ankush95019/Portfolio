@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import gitHubIcon from "../images/github-icon.04fa7de0.svg";
 import linkedInIcon from "../images/linkedin-icon.67ae5368.svg";
 import gmailIcon from "../images/gmail-logo.png";
-import axios from "axios";
+// import axios from "axios";
 import { IoCloseSharp } from "react-icons/io5";
 import {motion} from 'framer-motion'
+import { contactInformation } from "../services/Apis";
 
-const BASE_URL = "https://portfoliobackend-tart.onrender.com";
+// const BASE_URLI = "https://portfoliobackend-tart.onrender.com";
 
 export default function Contact() {
   const [inputText, setInputText] = useState({
@@ -29,43 +30,61 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post(
-        `${BASE_URL}/contactform`,
-        inputText
-      )
-      // console.log(response);
-      const {success,check} = response.data;
-      if (success) {
-        setConfirmationMsg(true);
-      }
-      if(check){
-        setConfirmationMsg(false);
-      } 
-    } catch (error) {
-      if (error.response) {
-        // Handle server-side errors (e.g., duplicate email)
-        console.error('Server error:', error.response.data);
-      } else {
-        // Handle network-related errors (e.g., server unreachable)
-        console.error('Network error:', error.message);
-      }
+    const config = {
+      "Content-Type": "application/json",
+    };
+
+    const response = await contactInformation(inputText, config);
+
+    if(response.status === 200){
+      setConfirmationMsg(true);
+      setInputText({
+        ...inputText,
+        email: "",
+        subject: "",
+        msg: "",
+      });
+    }
+    else{
+      console.log("Error from contact form");
       setConfirmationMsg(false);
     }
 
-    setInputText({
-      email: "",
-      subject: "",
-      msg: "",
-    });
+    // try {
+    //   const response = await axios.post(
+    //     `${BASE_URL}/contactform`,
+    //     inputText
+    //   )
+    //   // console.log(response);
+    //   const {success,check} = response.data;
+    //   if (success) {
+    //     setConfirmationMsg(true);
+    //   }
+    //   if(check){
+    //     setConfirmationMsg(false);
+    //   } 
+    // } catch (error) {
+    //   if (error.response) {
+    //     // Handle server-side errors (e.g., duplicate email)
+    //     console.error('Server error:', error.response.data);
+    //   } else {
+    //     // Handle network-related errors (e.g., server unreachable)
+    //     console.error('Network error:', error.message);
+    //   }
+    //   setConfirmationMsg(false);
+    // }
+
+    
     setTimeout(() => {
       setConfirmationMsg(null);
     }, 10000);
+
   };
 
   const handleCloseButton = () => {
     setConfirmationMsg(null);
   };
+
 
   return (
     <section

@@ -1,5 +1,5 @@
-// require('dotenv').config();
-// const mongoose = require('mongoose');
+require('dotenv').config();
+const mongoose = require('mongoose');
 // const {connect} = mongoose;
 // const URI = process.env.DATABASE;
 
@@ -16,7 +16,19 @@
 
 // module.exports = dbConnect;
 
+// connect mongodb
 
+const URI = process.env.DATABASE;
+// console.log(URI);
+
+mongoose.connect(URI,{
+  // useUnifiedTopology:true,
+  // useNewUrlParser:true
+}).then(()=>{
+  console.log('MongoDB connected');
+}).catch((err)=>{
+  console.log(err);
+})
 
 
 
