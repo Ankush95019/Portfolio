@@ -1,9 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const port = 5000;
+const PORT = process.env.PORT || 5000;
 const db = require('./config/db'); 
 const ContactInfo = require('./config/model');
 const cors = require('cors');
+
 
 app.use(express.json());
 app.use(cors());
@@ -41,6 +43,6 @@ app.post('/contactform', async (req,res)=>{
 })
 
 db();
-app.listen(port,()=>{
-  console.log('Sever is connected at port: 5000');
+app.listen(PORT,()=>{
+  console.log(`Sever is connected at port: ${PORT}`);
 })
