@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 const {connect} = mongoose;
+require('dotenv').config();
+const URI = process.env.DATABASE;
 
 const dbConnect = async () => {
   try{
-    await connect('mongodb://127.0.0.1:27017/Portfolio');
+    await connect(`${URI}`);
     console.log('Database is connected');
   }
   catch(err){
