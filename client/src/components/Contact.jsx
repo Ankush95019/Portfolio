@@ -6,7 +6,7 @@ import axios from "axios";
 import { IoCloseSharp } from "react-icons/io5";
 import {motion} from 'framer-motion'
 
-
+const BASE_URL = "https://portfoliobackend-tart.onrender.com";
 
 export default function Contact() {
   const [inputText, setInputText] = useState({
@@ -30,7 +30,7 @@ export default function Contact() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/contactform",
+        `${BASE_URL}/contactform`,
         inputText
       )
       // console.log(response);
