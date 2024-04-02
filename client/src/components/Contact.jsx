@@ -5,7 +5,6 @@ import gmailIcon from "../images/gmail-logo.png";
 import axios from "axios";
 import { IoCloseSharp } from "react-icons/io5";
 import {motion} from 'framer-motion'
-import { type } from "@testing-library/user-event/dist/type";
 
 
 

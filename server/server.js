@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 const port = 5000;
-const db = require('../backend/config/db'); 
-const ContactInfo = require('../backend/config/model');
+const db = require('./config/db'); 
+const ContactInfo = require('./config/model');
 const cors = require('cors');
 
 app.use(express.json());
