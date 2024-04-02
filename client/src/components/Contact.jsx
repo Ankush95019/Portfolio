@@ -15,6 +15,7 @@ export default function Contact() {
     msg: "",
   });
 
+
   const [confirmationMsg,setConfirmationMsg] = useState(null);
 
   const handleInput = (e) => {

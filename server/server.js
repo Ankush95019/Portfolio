@@ -2,9 +2,25 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 5000;
-const db = require('./config/db'); 
+// const db = require('./config/db'); 
 const ContactInfo = require('./config/model');
 const cors = require('cors');
+const { default: mongoose } = require('mongoose');
+
+
+// connect mongodb
+
+const URI = process.env.DATABASE;
+// console.log(URI);
+
+mongoose.connect(URI).then(()=>{
+  console.log('MongoDB connected');
+}).catch((err)=>{
+  console.log(err);
+})
+
+
+
 
 
 app.use(express.json());
@@ -42,7 +58,7 @@ app.post('/contactform', async (req,res)=>{
 
 })
 
-db();
+// db();
 app.listen(PORT,()=>{
   console.log(`Sever is connected at port: ${PORT}`);
 })
