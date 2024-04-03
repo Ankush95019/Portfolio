@@ -21,7 +21,7 @@ const mongoose = require('mongoose');
 const URI = process.env.DATABASE;
 // console.log(URI);
 
-mongoose.connect(URI,{
+mongoose.connect(`${URI}`,{
   // useUnifiedTopology:true,
   // useNewUrlParser:true
 }).then(()=>{
