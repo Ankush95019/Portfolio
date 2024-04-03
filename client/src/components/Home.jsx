@@ -1,9 +1,9 @@
-import React from 'react'
+// import React from 'react'
 
-export default function Home() {
-  return (
-    <div className='flex text-[#ADB7BE]'>
+// export default function Home() {
+//   return (
+//     <div className='flex text-[#ADB7BE]'>
       
-    </div>
-  )
-}
+//     </div>
+//   )
+// }

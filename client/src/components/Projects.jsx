@@ -4,6 +4,7 @@ import portfolioImg from '../images/portfolio-img.png'
 import todoImg from '../images/todo.png'
 import calImg from '../images/cal.png'
 import bmsImg from '../images/bms.png'
+import hmsImg from '../images/hms.png'
 
 
 import {motion} from 'framer-motion'
@@ -95,8 +96,8 @@ export default function Projects() {
       },
       {
         id: 2,
-        imgUrl: portfolioImg,
-        gitHubUrl: "/",
+        imgUrl: hmsImg,
+        gitHubUrl: "https://github.com/Ankush95019/hospital_management_system",
         title: "Hospital Management System",
         description: "Built this web application using MERN stack",
       },

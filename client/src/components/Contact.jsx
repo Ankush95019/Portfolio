@@ -4,7 +4,7 @@ import linkedInIcon from "../images/linkedin-icon.67ae5368.svg";
 import gmailIcon from "../images/gmail-logo.png";
 // import axios from "axios";
 import { IoCloseSharp } from "react-icons/io5";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
 import { contactInformation } from "../services/Apis";
 
 // const BASE_URLI = "https://portfoliobackend-tart.onrender.com";
@@ -16,8 +16,7 @@ export default function Contact() {
     msg: "",
   });
 
-
-  const [confirmationMsg,setConfirmationMsg] = useState(null);
+  const [confirmationMsg, setConfirmationMsg] = useState(null);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -36,7 +35,7 @@ export default function Contact() {
 
     const response = await contactInformation(inputText, config);
 
-    if(response.status === 200){
+    if (response.status === 200) {
       setConfirmationMsg(true);
       setInputText({
         ...inputText,
@@ -44,8 +43,7 @@ export default function Contact() {
         subject: "",
         msg: "",
       });
-    }
-    else{
+    } else {
       console.log("Error from contact form");
       setConfirmationMsg(false);
     }
@@ -62,7 +60,7 @@ export default function Contact() {
     //   }
     //   if(check){
     //     setConfirmationMsg(false);
-    //   } 
+    //   }
     // } catch (error) {
     //   if (error.response) {
     //     // Handle server-side errors (e.g., duplicate email)
@@ -74,22 +72,19 @@ export default function Contact() {
     //   setConfirmationMsg(false);
     // }
 
-    
     setTimeout(() => {
       setConfirmationMsg(null);
     }, 10000);
-
   };
 
   const handleCloseButton = () => {
     setConfirmationMsg(null);
   };
 
-
   return (
     <section
       id="contact"
-      className="grid md:grid-cols-2 my-12 md:my-12 pb-36 gap-4 relative"
+      className="grid md:grid-cols-2 my-12 md:my-12 pb-24 gap-4 relative pt-14"
     >
       <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute top-[355px] -left-5 transform -translate-x-1/2 -translate-1/2"></div>
       <div className="bg-transparent">
@@ -213,9 +208,7 @@ export default function Contact() {
             </button>
           </motion.div>
         ) : confirmationMsg === null ? (
-          <div
-            className=""
-          ></div>
+          <div className=""></div>
         ) : (
           <motion.div
             animate={{ x: 150 }}
