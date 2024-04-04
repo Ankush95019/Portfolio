@@ -17,7 +17,7 @@ export default function Contact() {
     msg: "",
   });
 
-  const [confirmationMsg, setConfirmationMsg] = useState(true);
+  const [confirmationMsg, setConfirmationMsg] = useState(null);
 
   const [loading, setLoading] = useState(false);
 
