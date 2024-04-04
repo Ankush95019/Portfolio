@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import gitHubIcon from "../images/github-icon.04fa7de0.svg";
 import linkedInIcon from "../images/linkedin-icon.67ae5368.svg";
 import gmailIcon from "../images/gmail-logo.png";
+// import spn from "../images/Spinner@1.25x-1.0s-200px-200px.svg";
 // import axios from "axios";
 import { IoCloseSharp } from "react-icons/io5";
 import { motion } from "framer-motion";
@@ -16,7 +17,9 @@ export default function Contact() {
     msg: "",
   });
 
-  const [confirmationMsg, setConfirmationMsg] = useState(null);
+  const [confirmationMsg, setConfirmationMsg] = useState(true);
+
+  const [loading, setLoading] = useState(false);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -29,6 +32,7 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
     const config = {
       "Content-Type": "application/json",
     };
@@ -36,7 +40,9 @@ export default function Contact() {
     const response = await contactInformation(inputText, config);
 
     if (response.status === 200) {
+      setLoading(false);
       setConfirmationMsg(true);
+
       setInputText({
         ...inputText,
         email: "",
@@ -182,53 +188,119 @@ export default function Contact() {
               className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
             ></textarea>
           </div>
-          <button
-            type="submit"
-            className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2.5 px-5 rounded-lg w-full"
-          >
-            Send Message
-          </button>
+          {loading ? (
+            <button
+              type="button"
+              className="bg-purple-500 text-white font-medium py-2.5 px-5 rounded-lg w-full flex items-center justify-center cursor-not-allowed opacity-75"
+              disabled
+            >
+              <svg
+                className="h-6 w-6 animate-spin mr-3"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-100"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              <span className="font-semibold">Processing...</span>
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2.5 px-5 rounded-lg w-full"
+            >
+              Send Message
+            </button>
+          )}
         </form>
         {confirmationMsg === true ? (
-          <motion.div
-            animate={{ x: 150 }}
-            initial={{ x: 300 }}
-            transition={{ ease: "easeIn" }}
-            className="flex bg-green-600 text-white font-medium py-2.5 px-3 rounded-lg w-90 absolute top-0 right-0 z-20"
-          >
-            <div className="bg-transparent">
-              <p className="bg-transparent">Your Message Sent Successfully.</p>
-              <p className="bg-transparent">I will contact to you shortly.</p>
-            </div>
-            <button
-              onClick={handleCloseButton}
-              className="flex bg-transparent pl-2 items-center"
+          <>
+            <motion.div
+              initial={{ x: 300 }}
+              animate={{ x: 30 }}
+              transition={{ ease: "easeIn" }}
+              className="md:hidden flex bg-green-600 text-white font-medium py-2.5 px-3 rounded-lg w-fit absolute -top-1/2 right-0 z-20"
             >
-              <IoCloseSharp className="bg-transparent text-white text-2xl" />
-            </button>
-          </motion.div>
+              <div>
+                <p>Your Message Sent Successfully.</p>
+                <p>I will contact to you shortly.</p>
+              </div>
+              <button
+                onClick={handleCloseButton}
+                className="flex pl-2 items-center"
+              >
+                <IoCloseSharp className="text-white text-2xl" />
+              </button>
+            </motion.div>
+            <motion.div
+              initial={{ x: 300 }}
+              animate={{ x: 110 }}
+              transition={{ ease: "easeIn" }}
+              className="hidden md:visible md:flex bg-green-600 text-white font-medium py-2.5 px-3 rounded-lg w-max absolute -top-12 right-16 z-20"
+            >
+              <div>
+                <p>Your Message Sent Successfully.</p>
+                <p>I will contact to you shortly.</p>
+              </div>
+              <button
+                onClick={handleCloseButton}
+                className="flex pl-2 items-center"
+              >
+                <IoCloseSharp className="text-white text-2xl" />
+              </button>
+            </motion.div>
+          </>
         ) : confirmationMsg === null ? (
           <div className=""></div>
         ) : (
-          <motion.div
-            animate={{ x: 150 }}
-            initial={{ x: 300 }}
-            transition={{ ease: "easeIn" }}
-            className="flex bg-red-600 text-white font-medium py-2.5 px-3 rounded-lg w-90 absolute top-0 right-0 z-20"
-          >
-            <div className="bg-transparent">
-              <p className="bg-transparent">
-                Message not sent due to some server issue.
-              </p>
-              <p className="bg-transparent">You can contact through E-mail.</p>
-            </div>
-            <button
-              onClick={handleCloseButton}
-              className="flex bg-transparent pl-2 items-center"
+          <>
+            <motion.div
+              initial={{ x: 300 }}
+              animate={{ x: 30 }}
+              transition={{ ease: "easeIn" }}
+              className="md:hidden flex bg-red-600 text-white font-medium py-2.5 px-3 rounded-lg w-fit absolute -top-1/2 right-0 z-20"
             >
-              <IoCloseSharp className="bg-transparent text-white text-2xl" />
-            </button>
-          </motion.div>
+              <div>
+                <p>Message not sent due to some server issue.</p>
+                <p>You can contact through E-mail.</p>
+              </div>
+              <button
+                onClick={handleCloseButton}
+                className="flex pl-2 items-center"
+              >
+                <IoCloseSharp className="text-white text-2xl" />
+              </button>
+            </motion.div>
+            <motion.div
+              initial={{ x: 300 }}
+              animate={{ x: 110 }}
+              transition={{ ease: "easeIn" }}
+              className="hidden md:visible md:flex bg-red-600 text-white font-medium py-2.5 px-3 rounded-lg w-max absolute -top-12 right-16 z-20"
+            >
+              <div>
+                <p>AMessage not sent due to some server issue.</p>
+                <p>You can contact through E-mail.</p>
+              </div>
+              <button
+                onClick={handleCloseButton}
+                className="flex pl-2 items-center"
+              >
+                <IoCloseSharp className="text-white text-2xl" />
+              </button>
+            </motion.div>
+          </>
         )}
       </div>
     </section>

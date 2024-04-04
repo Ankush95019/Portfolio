@@ -51,7 +51,7 @@ const Card = (props) => { // creating component for lists
       className="text-white mt-10"
     >
       <div
-        className="h-52 md:h-72 rounded-t-xl relative group w-full rounded-lg"
+        className="h-52 md:h-56 md:min-w-56 rounded-t-xl relative group w-full rounded-lg"
         style={{
           backgroundImage: `url('${props.imgUrl}')`,
           backgroundSize: "cover",
