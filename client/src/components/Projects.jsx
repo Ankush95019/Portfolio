@@ -140,8 +140,8 @@ export default function Projects() {
       },
       {
         id: 2,
-        imgUrl: myntraImg,
-        gitHubUrl: "/",
+        imgUrl: hmsImg,
+        gitHubUrl: "https://github.com/Ankush95019/hospital_management_system",
         title: "Hospital Management System",
         description: "Built this web application using MERN stack",
       },
